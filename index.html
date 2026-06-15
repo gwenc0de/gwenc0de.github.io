@@ -15,8 +15,8 @@
     --ink: #1C1C1E;
     --ink2: #5A5856;
     --ink3: #9A9692;
-    --green: #00C896;
-    --green-dim: rgba(0,200,150,0.12);
+    --green: #2DB88A;
+    --green-dim: rgba(45,184,138,0.09);
     --border: rgba(28,28,30,0.1);
   }
 
@@ -144,7 +144,7 @@
   /* ANIMATED GRADIENT NAME */
   .hero-name {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-size: clamp(2rem, 5.5vw, 4rem);
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.03em;
@@ -152,12 +152,12 @@
     position: relative;
   }
   #typed-name {
-    background: linear-gradient(90deg, #1C1C1E 0%, #00C896 40%, #1C1C1E 80%);
-    background-size: 200% auto;
+    background: linear-gradient(90deg, #1C1C1E 0%, #2DB88A 55%, #1C1C1E 100%);
+    background-size: 250% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    animation: gradient-shift 4s linear infinite;
+    animation: gradient-shift 6s linear infinite;
   }
   @keyframes gradient-shift {
     0% { background-position: 0% center; }
@@ -332,8 +332,45 @@
     color: var(--ink);
   }
 
-  /* SKILLS */
-  .skills-section { padding-top: 0; }
+  /* SKILL ICON SVG */
+  .skill-icon {
+    width: 40px; height: 40px;
+    background: var(--green-dim);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .skill-icon svg { width: 20px; height: 20px; stroke: var(--green); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* 3D TILT */
+  .project-card {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  .tilt-shine {
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.12), transparent 70%);
+  }
+  .project-card:hover .tilt-shine { opacity: 1; }
+
+  /* NOISE OVERLAY on hero */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.025;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 180px;
+    z-index: 0;
+  }
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -548,25 +585,25 @@
   <h2 class="section-title">Yang saya<br>bawa ke meja</h2>
   <div class="skills-grid">
     <div class="skill-card reveal">
-      <div class="skill-icon">🌐</div>
+      <div class="skill-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
       <h3>Pengembangan Web</h3>
       <p>Frontend sampai backend — dari desain antarmuka yang bersih hingga API yang stabil.</p>
       <div class="skill-tags"><span class="tag">HTML/CSS</span><span class="tag">JavaScript</span><span class="tag">PHP</span><span class="tag">MySQL</span></div>
     </div>
     <div class="skill-card reveal">
-      <div class="skill-icon">🏥</div>
+      <div class="skill-icon"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
       <h3>Sistem Informasi Kesehatan</h3>
       <p>Custom SIMRS Khanza, bridging Satu Sehat, modul antrian, dan integrasi radiologi DICOM.</p>
       <div class="skill-tags"><span class="tag">SIMRS Khanza</span><span class="tag">Satu Sehat API</span><span class="tag">DICOM</span><span class="tag">FHIR</span></div>
     </div>
     <div class="skill-card reveal">
-      <div class="skill-icon">🖥️</div>
+      <div class="skill-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
       <h3>Aplikasi Desktop</h3>
       <p>Aplikasi standalone untuk kebutuhan internal — ringan, cepat, dan bisa jalan offline.</p>
-      <div class="skill-tags"><span class="tag">Python</span><span class="tag">Shell Script</span><span class="tag">Linux</span><span class="tag">Docker</span></div>
+      <div class="skill-tags"><span class="tag">Java</span><span class="tag">Shell Script</span><span class="tag">Linux</span><span class="tag">Docker</span></div>
     </div>
     <div class="skill-card reveal">
-      <div class="skill-icon">🔗</div>
+      <div class="skill-icon"><svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
       <h3>Integrasi & Bridging</h3>
       <p>Menghubungkan sistem yang berbeda — SIMRS, server DICOM (Orthanc), dan API pemerintah.</p>
       <div class="skill-tags"><span class="tag">REST API</span><span class="tag">Orthanc</span><span class="tag">MariaDB</span><span class="tag">OAuth2</span></div>
@@ -582,6 +619,7 @@
   <h2 class="section-title">Yang sudah<br>jalan di lapangan</h2>
   <div class="projects-grid">
     <div class="project-card reveal">
+      <div class="tilt-shine"></div>
       <div class="project-header">
         <span class="project-badge">SIMRS · RADIOLOGI</span>
         <h3>Integrasi DICOM ke Satu Sehat</h3>
@@ -600,6 +638,7 @@
       <div class="terminal-strip">$ ./kirim_dicom.sh <span>→ [OK] 3/3 studi berhasil dikirim</span></div>
     </div>
     <div class="project-card reveal">
+      <div class="tilt-shine"></div>
       <div class="project-header">
         <span class="project-badge">SIMRS · ANTRIAN</span>
         <h3>Sistem Tracking Antrian Pasien</h3>
@@ -649,8 +688,8 @@
 <div class="divider"></div>
 
 <footer>
-  <p>© 2025 <span>Nanda Irwansyah</span></p>
-  <p>// dibuat tanpa template</p>
+  <p>© 2025 <span>gwenc0de</span></p>
+  <p>// Nanda Irwansyah, S.Kom</p>
 </footer>
 
 <script>
@@ -734,7 +773,7 @@ function drawParticles() {
     if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
     ctx.beginPath();
     ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    ctx.fillStyle = `rgba(0,200,150,${p.alpha})`;
+    ctx.fillStyle = `rgba(45,184,138,${p.alpha * 0.7})`;
     ctx.fill();
   });
 
@@ -748,7 +787,7 @@ function drawParticles() {
         ctx.beginPath();
         ctx.moveTo(particles[i].x, particles[i].y);
         ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = `rgba(0,200,150,${0.12 * (1 - dist / 120)})`;
+        ctx.strokeStyle = `rgba(45,184,138,${0.08 * (1 - dist / 120)})`;
         ctx.lineWidth = 0.5;
         ctx.stroke();
       }
@@ -807,7 +846,23 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 reveals.forEach(el => observer.observe(el));
 
-// ─── SMOOTH ANCHOR ─────────────────────────────────────
+// ─── 3D TILT ON PROJECT CARDS ──────────────────────────
+document.querySelectorAll('.project-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = `perspective(700px) rotateY(${x * 8}deg) rotateX(${-y * 6}deg) scale(1.02)`;
+    const shine = card.querySelector('.tilt-shine');
+    if (shine) shine.style.background = `radial-gradient(circle at ${(x+0.5)*100}% ${(y+0.5)*100}%, rgba(255,255,255,0.13), transparent 65%)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.transition = 'transform 0.5s ease, border-color 0.2s';
+    setTimeout(() => card.style.transition = '', 500);
+  });
+});
+
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
