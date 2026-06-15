@@ -720,10 +720,13 @@ const typedEl = document.getElementById('typed-name');
 const glitchWrap = document.getElementById('glitch-wrap');
 const phrases = ['Nanda Irwansyah, S.Kom', 'gwenc0de'];
 let cur=0, pos=0, del=false;
+const isMobile = window.matchMedia('(hover: none)').matches;
+
 function triggerGlitch() {
+  if (isMobile) return;
   glitchWrap.setAttribute('data-text', typedEl.textContent);
   glitchWrap.classList.add('is-glitching');
-  setTimeout(() => glitchWrap.classList.remove('is-glitching'), 340);
+  setTimeout(() => glitchWrap.classList.remove('is-glitching'), 380);
 }
 function tick() {
   const w = phrases[cur];
