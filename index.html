@@ -512,7 +512,7 @@
 <!-- HERO -->
 <div class="hero">
   <div class="hero-eyebrow">Solusi Bisnis Anda!</div>
-  <h1 class="hero-name">gwenc0de<span class="cursor-blink"></span></h1>
+  <h1 class="hero-name"><span id="typed-name"></span><span class="cursor-blink"></span></h1>
   <p class="hero-title">
     <strong>Fullstack Developer</strong> · Spesialis Sistem Informasi Kesehatan
   </p>
@@ -766,6 +766,41 @@
       }
     });
   });
+
+ (function() {
+  const el = document.getElementById('typed-name');
+  const phrases = ['Nanda Irwansyah', 'gwenc0de'];
+  let current = 0;
+  let pos = 0;
+  let deleting = false;
+
+  function tick() {
+    const word = phrases[current];
+
+    if (!deleting) {
+      el.textContent = word.slice(0, pos + 1);
+      pos++;
+      if (pos === word.length) {
+        deleting = true;
+        setTimeout(tick, 2000); // pause sebelum hapus
+        return;
+      }
+      setTimeout(tick, 80);
+    } else {
+      el.textContent = word.slice(0, pos - 1);
+      pos--;
+      if (pos === 0) {
+        deleting = false;
+        current = (current + 1) % phrases.length;
+        setTimeout(tick, 400); // pause sebelum ketik lagi
+        return;
+      }
+      setTimeout(tick, 45); // hapus lebih cepat dari ketik
+    }
+  }
+
+  tick();
+})();
 </script>
 
 </body>
