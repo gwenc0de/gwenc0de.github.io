@@ -751,8 +751,8 @@ function animateCount(el, target, duration) {
 const statsObserver = new IntersectionObserver(entries => {
   if(entries[0].isIntersecting) {
     animateCount(document.getElementById('cnt-rs'), 5, 1200);
-    animateCount(document.getElementById('cnt-modul'), 12, 1400);
-    animateCount(document.getElementById('cnt-tahun'), 4, 1000);
+    animateCount(document.getElementById('cnt-modul'), 60, 1400);
+    animateCount(document.getElementById('cnt-tahun'), 8, 1000);
     statsObserver.disconnect();
   }
 }, { threshold: 0.5 });
