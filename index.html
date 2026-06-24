@@ -574,57 +574,58 @@ footer span { color: var(--ink); font-weight: 700; background: var(--yellow); pa
       <div class="project-card-stripe"></div>
       <div class="tilt-shine"></div>
       <div class="project-header">
-        <span class="project-badge">Health IT · Radiologi</span>
-        <h3>Integrasi DICOM ke Satu Sehat</h3>
+        <span class="project-badge">SIMRS · Custom</span>
+        <h3>Custom SIMRS Khanza</h3>
         <p>
-          Sistem pengiriman data studi radiologi DICOM dari SIMRS Khanza ke platform
-          Satu Sehat Kemenkes secara otomatis — menggantikan proses input manual yang
-          sebelumnya memakan waktu petugas setiap hari.
+          Modifikasi dan pengembangan fitur SIMRS Khanza sesuai kebutuhan spesifik
+          fasilitas kesehatan — tanpa mengganggu sistem inti yang sudah berjalan.
         </p>
       </div>
       <div class="project-body">
         <ul class="project-features">
-          <li>Token OAuth2 Satu Sehat diambil otomatis — petugas tidak perlu login ulang</li>
-          <li>Data ServiceRequest radiologi langsung terhubung ke database Khanza</li>
-          <li>Studi DICOM dikirim ke PACS router Orthanc tanpa langkah tambahan</li>
-          <li>Laporan status pengiriman tampil per permintaan — jelas mana yang berhasil</li>
-          <li>Bisa proses banyak permintaan sekaligus, error per item tidak menghentikan yang lain</li>
+          <li>Tambah modul baru sesuai alur kerja dan kebutuhan khusus faskes</li>
+          <li>Modifikasi tampilan dan laporan tanpa ubah struktur database inti</li>
+          <li>Custom form pendaftaran, rekam medis, dan billing sesuai permintaan</li>
+          <li>Integrasi modul antrian, display pasien, dan notifikasi otomatis</li>
+          <li>Support dan maintenance jangka panjang setelah sistem live</li>
         </ul>
         <div class="project-stack">
-          <span class="tag">Bash</span><span class="tag">Python</span><span class="tag">Orthanc</span>
-          <span class="tag">MariaDB</span><span class="tag">FHIR R4</span><span class="tag">Satu Sehat API</span>
+          <span class="tag">SIMRS Khanza</span><span class="tag">PHP</span>
+          <span class="tag">MySQL</span><span class="tag">JavaScript</span><span class="tag">Linux</span>
         </div>
       </div>
-      <div class="terminal-strip">$ ./kirim_dicom.sh <span>→ [OK] 3/3 studi berhasil dikirim</span></div>
+      <div class="terminal-strip">$ custom_module.sh <span>→ Modul baru aktif tanpa downtime</span></div>
     </div>
 
     <div class="project-card reveal">
       <div class="project-card-stripe"></div>
       <div class="tilt-shine"></div>
       <div class="project-header">
-        <span class="project-badge">Health IT · Antrian</span>
-        <h3>Sistem Tracking Antrian Pasien</h3>
+        <span class="project-badge">Health IT · Bridging</span>
+        <h3>Integrasi Satu Sehat, BPJS & Layanan Kesehatan</h3>
         <p>
-          Modul antrian berbasis web untuk SIMRS Khanza — pasien bisa pantau
-          nomor antrian mereka dari ponsel sendiri, tanpa perlu bolak-balik
-          nanya ke meja pendaftaran.
+          Menghubungkan SIMRS Khanza dengan berbagai platform layanan kesehatan nasional —
+          data mengalir otomatis, petugas tidak perlu input ulang di sistem berbeda.
         </p>
       </div>
       <div class="project-body">
         <ul class="project-features">
-          <li>Pasien cukup masukkan NIK dan tanggal periksa — antrian langsung muncul</li>
-          <li>Info poli, nama dokter, jam registrasi, dan status tampil lengkap</li>
-          <li>Layar display antrian untuk ruang tunggu — bisa dipasang di TV atau monitor</li>
-          <li>Tampilan responsif di HP tanpa perlu install aplikasi apapun</li>
-          <li>Terhubung langsung ke database Khanza — tidak perlu ubah sistem yang ada</li>
+          <li>Bridging Satu Sehat Kemenkes — data kunjungan, diagnosis, dan tindakan terkirim otomatis</li>
+          <li>Integrasi BPJS — verifikasi kepesertaan, SEP, dan klaim langsung dari SIMRS</li>
+          <li>Pengiriman data radiologi DICOM ke PACS router Orthanc</li>
+          <li>Token OAuth2 diperbarui otomatis — tidak ada sesi yang expired mendadak</li>
+          <li>Log pengiriman tersimpan — mudah dilacak jika ada data yang perlu dikirim ulang</li>
         </ul>
         <div class="project-stack">
-          <span class="tag">PHP</span><span class="tag">JavaScript</span>
-          <span class="tag">MySQL</span><span class="tag">SIMRS Khanza</span><span class="tag">Bootstrap</span>
+          <span class="tag">Satu Sehat API</span><span class="tag">BPJS API</span>
+          <span class="tag">FHIR R4</span><span class="tag">DICOM</span>
+          <span class="tag">Orthanc</span><span class="tag">OAuth2</span><span class="tag">MariaDB</span>
         </div>
       </div>
-      <div class="terminal-strip">$ SELECT no_reg, stts FROM reg_periksa <span>→ Antrian #A-042 · Menunggu</span></div>
+      <div class="terminal-strip">$ bridging_status.sh <span>→ Satu Sehat ✓ BPJS ✓ DICOM ✓</span></div>
     </div>
+
+</div>
 
   </div>
   <p style="margin-top:1.5rem;font-size:13px;color:var(--ink3);font-family:'JetBrains Mono',monospace;text-align:center;font-weight:600;">
