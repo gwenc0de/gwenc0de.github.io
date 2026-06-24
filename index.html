@@ -81,6 +81,7 @@ nav {
   background: var(--yellow); border: var(--border);
   padding: 4px 12px; box-shadow: var(--shadow);
   transition: transform 0.15s, box-shadow 0.15s;
+  flex-shrink: 0;
 }
 .nav-logo:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-lg); }
 .nav-links { display: flex; gap: 0; list-style: none; }
@@ -93,6 +94,48 @@ nav {
   letter-spacing: 0.05em; transition: background 0.15s;
 }
 .nav-links a:hover { background: var(--yellow); }
+.nav-links a.active { background: var(--yellow); }
+
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column; justify-content: center; gap: 5px;
+  width: 36px; height: 36px;
+  background: var(--yellow); border: var(--border);
+  box-shadow: var(--shadow); cursor: pointer;
+  padding: 6px; flex-shrink: 0;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.hamburger:hover { transform: translate(-2px,-2px); box-shadow: var(--shadow-lg); }
+.hamburger span {
+  display: block; height: 2.5px;
+  background: var(--ink);
+  transition: transform 0.25s, opacity 0.25s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
+
+/* MOBILE DROPDOWN MENU */
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 57px; left: 0; right: 0;
+  z-index: 99;
+  background: var(--bg);
+  border-bottom: var(--border);
+  flex-direction: column;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  display: block; padding: 14px 1.5rem;
+  font-size: 14px; font-weight: 700; color: var(--ink);
+  text-decoration: none; text-transform: uppercase;
+  letter-spacing: 0.08em; border-bottom: var(--border);
+  transition: background 0.15s;
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover, .mobile-menu a.active { background: var(--yellow); }
 
 /* HERO */
 .hero {
@@ -114,7 +157,7 @@ nav {
 }
 
 .hero-name {
-  font-size: clamp(1.6rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 4vw, 4rem);
   font-weight: 800; line-height: 1;
   letter-spacing: -0.03em; margin-bottom: 0.5rem; position: relative;
 }
@@ -355,7 +398,8 @@ footer span { color: var(--ink); font-weight: 700; background: var(--yellow); pa
   #cursor, #cursor-ring { display: none; }
   #particle-canvas { display: none; }
   nav { padding: 0.85rem 1.25rem; }
-  .nav-links a { padding: 6px 12px; font-size: 11px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
   .hero { padding: 7rem 1.25rem 3rem; }
   section { padding: 3.5rem 1.25rem; }
   .about-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -363,7 +407,7 @@ footer span { color: var(--ink); font-weight: 700; background: var(--yellow); pa
   .hero-stats { flex-direction: column; width: 100%; }
   .stat-item { border-right: none; border-bottom: var(--border); }
   .stat-item:last-child { border-bottom: none; }
-  footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  footer { justify-content: center; }
 }
 </style>
 </head>
@@ -383,7 +427,19 @@ footer span { color: var(--ink); font-weight: 700; background: var(--yellow); pa
     <li><a href="#projects">proyek</a></li>
     <li><a href="#contact">kontak</a></li>
   </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a href="#about">Tentang</a>
+  <a href="#layanan">Layanan</a>
+  <a href="#skills">Keahlian</a>
+  <a href="#projects">Proyek</a>
+  <a href="#contact">Kontak</a>
+</div>
 
 <div class="hero">
   <div class="hero-eyebrow">✦ Solusi Digital untuk Bisnis Anda</div>
@@ -574,58 +630,57 @@ footer span { color: var(--ink); font-weight: 700; background: var(--yellow); pa
       <div class="project-card-stripe"></div>
       <div class="tilt-shine"></div>
       <div class="project-header">
-        <span class="project-badge">SIMRS · Custom</span>
-        <h3>Custom SIMRS Khanza</h3>
+        <span class="project-badge">Health IT · Radiologi</span>
+        <h3>Integrasi DICOM ke Satu Sehat</h3>
         <p>
-          Modifikasi dan pengembangan fitur SIMRS Khanza sesuai kebutuhan spesifik
-          fasilitas kesehatan — tanpa mengganggu sistem inti yang sudah berjalan.
+          Sistem pengiriman data studi radiologi DICOM dari SIMRS Khanza ke platform
+          Satu Sehat Kemenkes secara otomatis — menggantikan proses input manual yang
+          sebelumnya memakan waktu petugas setiap hari.
         </p>
       </div>
       <div class="project-body">
         <ul class="project-features">
-          <li>Tambah modul baru sesuai alur kerja dan kebutuhan khusus faskes</li>
-          <li>Modifikasi tampilan dan laporan tanpa ubah struktur database inti</li>
-          <li>Custom form pendaftaran, rekam medis, dan billing sesuai permintaan</li>
-          <li>Integrasi modul antrian, display pasien, dan notifikasi otomatis</li>
-          <li>Support dan maintenance jangka panjang setelah sistem live</li>
+          <li>Token OAuth2 Satu Sehat diambil otomatis — petugas tidak perlu login ulang</li>
+          <li>Data ServiceRequest radiologi langsung terhubung ke database Khanza</li>
+          <li>Studi DICOM dikirim ke PACS router Orthanc tanpa langkah tambahan</li>
+          <li>Laporan status pengiriman tampil per permintaan — jelas mana yang berhasil</li>
+          <li>Bisa proses banyak permintaan sekaligus, error per item tidak menghentikan yang lain</li>
         </ul>
         <div class="project-stack">
-          <span class="tag">SIMRS Khanza</span><span class="tag">PHP</span>
-          <span class="tag">MySQL</span><span class="tag">JavaScript</span><span class="tag">Linux</span>
+          <span class="tag">Bash</span><span class="tag">Python</span><span class="tag">Orthanc</span>
+          <span class="tag">MariaDB</span><span class="tag">FHIR R4</span><span class="tag">Satu Sehat API</span>
         </div>
       </div>
-      <div class="terminal-strip">$ custom_module.sh <span>→ Modul baru aktif tanpa downtime</span></div>
+      <div class="terminal-strip">$ ./kirim_dicom.sh <span>→ [OK] 3/3 studi berhasil dikirim</span></div>
     </div>
 
     <div class="project-card reveal">
       <div class="project-card-stripe"></div>
       <div class="tilt-shine"></div>
       <div class="project-header">
-        <span class="project-badge">Health IT · Bridging</span>
-        <h3>Integrasi Satu Sehat, BPJS & Layanan Kesehatan</h3>
+        <span class="project-badge">Health IT · Antrian</span>
+        <h3>Sistem Tracking Antrian Pasien</h3>
         <p>
-          Menghubungkan SIMRS Khanza dengan berbagai platform layanan kesehatan nasional —
-          data mengalir otomatis, petugas tidak perlu input ulang di sistem berbeda.
+          Modul antrian berbasis web untuk SIMRS Khanza — pasien bisa pantau
+          nomor antrian mereka dari ponsel sendiri, tanpa perlu bolak-balik
+          nanya ke meja pendaftaran.
         </p>
       </div>
       <div class="project-body">
         <ul class="project-features">
-          <li>Bridging Satu Sehat Kemenkes — data kunjungan, diagnosis, dan tindakan terkirim otomatis</li>
-          <li>Integrasi BPJS — verifikasi kepesertaan, SEP, dan klaim langsung dari SIMRS</li>
-          <li>Pengiriman data radiologi DICOM ke PACS router Orthanc</li>
-          <li>Token OAuth2 diperbarui otomatis — tidak ada sesi yang expired mendadak</li>
-          <li>Log pengiriman tersimpan — mudah dilacak jika ada data yang perlu dikirim ulang</li>
+          <li>Pasien cukup masukkan NIK dan tanggal periksa — antrian langsung muncul</li>
+          <li>Info poli, nama dokter, jam registrasi, dan status tampil lengkap</li>
+          <li>Layar display antrian untuk ruang tunggu — bisa dipasang di TV atau monitor</li>
+          <li>Tampilan responsif di HP tanpa perlu install aplikasi apapun</li>
+          <li>Terhubung langsung ke database Khanza — tidak perlu ubah sistem yang ada</li>
         </ul>
         <div class="project-stack">
-          <span class="tag">Satu Sehat API</span><span class="tag">BPJS API</span>
-          <span class="tag">FHIR R4</span><span class="tag">DICOM</span>
-          <span class="tag">Orthanc</span><span class="tag">OAuth2</span><span class="tag">MariaDB</span>
+          <span class="tag">PHP</span><span class="tag">JavaScript</span>
+          <span class="tag">MySQL</span><span class="tag">SIMRS Khanza</span><span class="tag">Bootstrap</span>
         </div>
       </div>
-      <div class="terminal-strip">$ bridging_status.sh <span>→ Satu Sehat ✓ BPJS ✓ DICOM ✓</span></div>
+      <div class="terminal-strip">$ SELECT no_reg, stts FROM reg_periksa <span>→ Antrian #A-042 · Menunggu</span></div>
     </div>
-
-</div>
 
   </div>
   <p style="margin-top:1.5rem;font-size:13px;color:var(--ink3);font-family:'JetBrains Mono',monospace;text-align:center;font-weight:600;">
@@ -664,7 +719,8 @@ footer span { color: var(--ink); font-weight: 700; background: var(--yellow); pa
 <div class="divider"></div>
 
 <footer>
-  <p>© 2025 <span>gwenc0de</span> — Nanda Irwansyah, S.Kom</p>
+  <p>© 2025 <span>gwenc0de</span> — PT / perusahaan Nanda Irwansyah</p>
+  <p>// Dibuat sendiri, dari nol</p>
 </footer>
 
 <script>
@@ -810,6 +866,33 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach((e,i) => { if(e.isIntersecting) setTimeout(()=>e.target.classList.add('visible'),i*70); });
 }, { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// HAMBURGER MENU
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobile-menu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+mobileMenu.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  });
+});
+
+// ACTIVE NAV HIGHLIGHT ON SCROLL
+const sections = document.querySelectorAll('section[id]');
+const navAnchors = document.querySelectorAll('.nav-links a, .mobile-menu a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navAnchors.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}, { passive: true });
 
 // SMOOTH ANCHOR
 document.querySelectorAll('a[href^="#"]').forEach(a => {
